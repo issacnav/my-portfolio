@@ -13,7 +13,7 @@ const projects = [
   {
     title: "PhysioHub",
     description:
-      "A comprehensive physiotherapy platform designed to streamline patient care, exercise prescription, and rehabilitation tracking. Built to bridge the gap between practitioners and patients with an intuitive digital experience.",
+      "A comprehensive physiotherapy platform consist of Quiz, Flashcard and Blog features. The Quiz feature offers interactive quizzes with real-time scoring, while the Flashcard feature provides a spaced repetition system for effective learning. Discontinued in 2025 due to examination commitments.",
     tags: ["Healthcare", "Physiotherapy", "Platform"],
     url: "https://physiohub.io",
     status: "Archived" as const,

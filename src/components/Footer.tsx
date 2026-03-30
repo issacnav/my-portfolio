@@ -1,14 +1,27 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { CrossMarker } from "@/components/LayoutParts";
 import { FadeIn } from "@/components/Motion";
 import { Signature } from "@/components/Signature";
-import Lottie, { type LottieRefCurrentProps } from "lottie-react";
-import hiAnimation from "../../public/Hi.json";
+import type { LottieRefCurrentProps } from "lottie-react";
+
+const Lottie = dynamic(() => import("lottie-react").then((m) => m.default), {
+  ssr: false,
+});
 
 export function Footer() {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
+  const hiAnimation = useRef<object | null>(null);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    import("../../public/Hi.json").then((mod) => {
+      hiAnimation.current = mod.default;
+      setLoaded(true);
+    });
+  }, []);
 
   const handleClick = () => {
     lottieRef.current?.goToAndPlay(0);
@@ -35,13 +48,15 @@ export function Footer() {
             </span>
           </div>
           <div className="w-20 h-20 cursor-pointer flex-shrink-0" onClick={handleClick}>
-            <Lottie
-              lottieRef={lottieRef}
-              animationData={hiAnimation}
-              loop={false}
-              autoplay
-              onComplete={handleComplete}
-            />
+            {loaded && hiAnimation.current && (
+              <Lottie
+                lottieRef={lottieRef}
+                animationData={hiAnimation.current}
+                loop={false}
+                autoplay
+                onComplete={handleComplete}
+              />
+            )}
           </div>
         </div>
     </footer>

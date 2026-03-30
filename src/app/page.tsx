@@ -5,6 +5,7 @@ import { ConnectSection } from "@/components/ConnectSection";
 import { CertificationsSection } from "@/components/GitHubActivitySection";
 import { ExperienceSection } from "@/components/ExperienceSection";
 import { EducationSection } from "@/components/EducationSection";
+import { PublicationsSection } from "@/components/PublicationsSection";
 import { QuoteSection } from "@/components/QuoteSection";
 import { Footer } from "@/components/Footer";
 import { SectionSeparator } from "@/components/LayoutParts";
@@ -36,6 +37,9 @@ export default function Home() {
           <SectionSeparator />
 
           <EducationSection />
+          <SectionSeparator />
+
+          <PublicationsSection />
           <SectionSeparator />
 
           <QuoteSection />

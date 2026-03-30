@@ -20,7 +20,7 @@ export function AboutSection() {
             <StaggerItem>
               <p>
                 <span className="text-muted-foreground mr-1">•</span>
-                Currently pursuing my <strong>MSc in Advanced Physiotherapy Practice</strong>at
+                Currently pursuing my <strong>MSc in Advanced Physiotherapy Practice</strong> at
                 Glasgow Caledonian University, Scotland. I&apos;m passionate about
                 evidence-based patient care and collaborative healthcare.
               </p>

@@ -12,7 +12,7 @@ import { useCallback } from "react";
 const links = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/sarthak-navalekar/", icon: LinkedInIcon },
   { label: "Mail", href: "mailto:snaval300@caledonian.ac.uk", icon: MailIcon },
-  { label: "Resume", href: "/resume.pdf", icon: ResumeIcon },
+  { label: "Resume", href: "https://drive.google.com/file/d/1AZStOPzqgW-0yYSbCrELkORRKVAUbCaG/view", icon: ResumeIcon },
 ];
 
 function VCardButton() {
