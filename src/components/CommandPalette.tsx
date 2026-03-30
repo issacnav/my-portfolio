@@ -2,22 +2,34 @@
 
 import { useEffect, useState, useRef, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { SearchIcon } from "@/components/icons";
+import { SearchIcon, LinkedInIcon } from "@/components/icons";
+import {
+  Home,
+  User,
+  Link2,
+  Award,
+  Briefcase,
+  GraduationCap,
+  Quote,
+  FileText,
+  Mail,
+} from "lucide-react";
+import { type ComponentType } from "react";
 
-const sections = [
-  { label: "Home", id: "top", icon: "🏠" },
-  { label: "About", id: "about", icon: "👤" },
-  { label: "Connect", id: "connect", icon: "🔗" },
-  { label: "Certifications & Skills", id: "certifications", icon: "📜" },
-  { label: "Experience", id: "experience", icon: "💼" },
-  { label: "Education", id: "education", icon: "🎓" },
-  { label: "Quote", id: "quote", icon: "💬" },
+const sections: { label: string; id: string; icon: ComponentType<{ className?: string }> }[] = [
+  { label: "Home", id: "top", icon: Home },
+  { label: "About", id: "about", icon: User },
+  { label: "Connect", id: "connect", icon: Link2 },
+  { label: "Certifications & Skills", id: "certifications", icon: Award },
+  { label: "Experience", id: "experience", icon: Briefcase },
+  { label: "Education", id: "education", icon: GraduationCap },
+  { label: "Quote", id: "quote", icon: Quote },
 ];
 
-const actions = [
-  { label: "Download Resume", icon: "📄", action: () => window.open("/resume.pdf", "_blank") },
-  { label: "Send Email", icon: "✉️", action: () => window.open("mailto:snaval300@caledonian.ac.uk") },
-  { label: "Open LinkedIn", icon: "💼", action: () => window.open("https://www.linkedin.com/in/sarthak-navalekar/", "_blank") },
+const actions: { label: string; icon: ComponentType<{ className?: string }>; action: () => void }[] = [
+  { label: "Download Resume", icon: FileText, action: () => window.open("/resume.pdf", "_blank") },
+  { label: "Send Email", icon: Mail, action: () => window.open("mailto:snaval300@caledonian.ac.uk") },
+  { label: "Open LinkedIn", icon: LinkedInIcon, action: () => window.open("https://www.linkedin.com/in/sarthak-navalekar/", "_blank") },
 ];
 
 export function CommandPalette() {
@@ -141,7 +153,9 @@ export function CommandPalette() {
                         onClick={() => handleSelect(item)}
                         onMouseEnter={() => setSelectedIndex(i)}
                       >
-                        <span className="text-base">{item.icon}</span>
+                        <span className="flex size-5 items-center justify-center text-muted-foreground">
+                          <item.icon className="size-4" />
+                        </span>
                         <span>{item.label}</span>
                         <span className="ml-auto text-xs text-muted-foreground capitalize">
                           {item.type}

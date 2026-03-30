@@ -20,7 +20,7 @@ export function AboutSection() {
             <StaggerItem>
               <p>
                 <span className="text-muted-foreground mr-1">•</span>
-                Currently pursuing my MSc in Advanced Physiotherapy Practice at
+                Currently pursuing my <strong>MSc in Advanced Physiotherapy Practice</strong>at
                 Glasgow Caledonian University, Scotland. I&apos;m passionate about
                 evidence-based patient care and collaborative healthcare.
               </p>
@@ -28,8 +28,10 @@ export function AboutSection() {
             <StaggerItem>
               <p>
                 <span className="text-muted-foreground mr-1">•</span>
-                Beyond clinical work, I volunteer with organizations like the Stroke
-                Association and Chest Heart &amp; Stroke Scotland, supporting community
+                Beyond clinical work, I volunteer with organizations like the{" "}
+                <a href="https://www.stroke.org.uk/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-foreground">Stroke
+                Association</a> and{" "}
+                <a href="https://www.chss.org.uk/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-foreground">Chest Heart &amp; Stroke Scotland</a>, supporting community
                 health initiatives. I believe in compassionate care and continuous
                 professional development.
               </p>

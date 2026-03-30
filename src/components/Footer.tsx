@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { CrossMarker } from "@/components/LayoutParts";
 import { FadeIn } from "@/components/Motion";
+import { Signature } from "@/components/Signature";
 import Lottie, { type LottieRefCurrentProps } from "lottie-react";
 import hiAnimation from "../../public/Hi.json";
 
@@ -25,6 +26,7 @@ export function Footer() {
 
         <div className="flex items-end justify-between gap-2 px-3 pb-4 sm:px-4">
           <div className="mt-6 flex flex-col leading-none">
+            <Signature className="w-24 mb-2 text-foreground sm:w-28" />
             <span className="font-mono text-[12px] text-muted-foreground">
               © 2026 Sarthak Navalekar
             </span>

@@ -7,7 +7,7 @@ import { CrossMarker } from "@/components/LayoutParts";
 import { FadeIn, ScaleIn, SlideIn, motion } from "@/components/Motion";
 import { AnimatePresence } from "framer-motion";
 
-const titles = ["Physiotherapist", "Researcher", "Rehab Specialist", "Educator"];
+const titles = ["Physiotherapist", "Researcher", "Rehab Specialist", "Nerd ʕ•ᴥ•ʔ"];
 
 function TextFlip() {
   const [index, setIndex] = useState(0);
@@ -63,7 +63,7 @@ function LocalTime() {
   if (!time) return null;
 
   return (
-    <span className="inline-flex items-center gap-1.5 font-mono text-sm text-muted-foreground">
+    <span className="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground sm:text-sm">
       <span>🕐</span>
       <span>{time} Scotland</span>
     </span>
@@ -147,40 +147,37 @@ export function HeroSection() {
         </ScaleIn>
 
         {/* Info */}
-        <div className="flex flex-1 flex-col justify-center gap-1 overflow-hidden pl-2 sm:pl-4">
+        <div className="flex flex-1 flex-col justify-center gap-1.5 overflow-hidden pl-2 pr-2 sm:pl-4 sm:pr-0">
           <SlideIn direction="right" delay={0.3}>
-            <div className="flex flex-wrap items-center gap-1.5 pt-2 pb-2 sm:gap-2">
-              <h1 className="font-pixel text-lg leading-none font-black sm:text-3xl">
+            <div className="flex items-center gap-1.5 pt-1 pb-1 sm:gap-2 sm:pt-2 sm:pb-2">
+              <h1 className="font-pixel text-xl leading-tight font-black sm:text-3xl">
                 Sarthak Navalekar
               </h1>
-              <div className="flex items-center gap-1.5">
-                <PronounceName />
+              <div className="flex items-center gap-1 shrink-0">
                 <motion.span
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.6, type: "spring", stiffness: 400 }}
                 >
-                  <VerifiedIcon className="size-4.5 text-info select-none" />
+                  <VerifiedIcon className="size-4 text-info select-none sm:size-4.5" />
                 </motion.span>
+                <PronounceName />
               </div>
             </div>
           </SlideIn>
 
           <FadeIn delay={0.5}>
-            <p className="flex flex-wrap items-baseline gap-1.5 font-mono text-sm leading-snug text-muted-foreground sm:text-base">
+            <div className="flex items-baseline gap-0 font-mono text-sm leading-snug text-muted-foreground sm:text-base">
               <TextFlip />
-              <span>·</span>
-              <span>Scotland, UK</span>
-            </p>
+              <span className="mx-1.5">·</span>
+              <span className="whitespace-nowrap">Scotland, UK</span>
+            </div>
           </FadeIn>
 
           <FadeIn delay={0.6}>
-            <div className="flex flex-wrap min-h-5 items-center gap-3 font-mono text-sm text-muted-foreground mt-0.5 sm:gap-4">
-              <span className="flex items-center gap-1.5">
-                <span className="status-pulse h-2 w-2 shrink-0 rounded-full bg-green-500" />
-                <span>Open to opportunities</span>
-              </span>
-              <LocalTime />
+            <div className="flex items-center gap-1.5 font-mono text-sm text-muted-foreground sm:text-base">
+              <span className="status-pulse h-1.5 w-1.5 shrink-0 rounded-full bg-green-500" />
+              <span>Open to opportunities</span>
             </div>
           </FadeIn>
         </div>

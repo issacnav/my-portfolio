@@ -17,10 +17,10 @@ import {
 import { type ComponentType } from "react";
 
 const certifications = [
-  "Level 3 Health and Social Care with Adult Nursing",
+  "Manual Therapy Certification",
   "VTCT Skills (ITEC) Level 3 Extended Diploma in Sport Massage",
   "Certified Acupuncture & Dry Needling Therapist",
-  "Manual Therapy Certification",
+  "Level 3 Health and Social Care with Adult Nursing",
 ];
 
 const hoverColors = [
@@ -112,7 +112,7 @@ export function CertificationsSection() {
               <div className="flex flex-1 flex-col gap-1">
                 <span className="text-xs font-medium text-neutral-500 dark:text-neutral-400">Interests</span>
                 <span className="text-sm text-neutral-800 dark:text-white/80">
-                  Creative writing · Volunteering · Chess · Documentaries
+                  Creative writing · Volunteering · Chess · Web development
                 </span>
               </div>
             </div>

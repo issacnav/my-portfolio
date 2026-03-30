@@ -3,11 +3,14 @@
 import { createContext, useContext, useState, useEffect, useCallback, useRef } from "react";
 
 type Theme = "light" | "dark" | "system";
+type ColorTheme = "default" | "ember" | "amethyst" | "sepia" | "sandstone" | "dune" | "slate";
 
 const ThemeContext = createContext<{
   theme: Theme;
+  colorTheme: ColorTheme;
   setTheme: (t: Theme, event?: React.MouseEvent) => void;
-}>({ theme: "system", setTheme: () => {} });
+  setColorTheme: (c: ColorTheme) => void;
+}>({ theme: "system", colorTheme: "default", setTheme: () => {}, setColorTheme: () => {} });
 
 export function useTheme() {
   return useContext(ThemeContext);
@@ -19,6 +22,15 @@ function applyTheme(theme: Theme) {
     root.classList.add("dark");
   } else {
     root.classList.remove("dark");
+  }
+}
+
+function applyColorTheme(colorTheme: ColorTheme) {
+  const root = document.documentElement;
+  if (colorTheme === "default") {
+    root.removeAttribute("data-color-theme");
+  } else {
+    root.setAttribute("data-color-theme", colorTheme);
   }
 }
 
@@ -49,6 +61,7 @@ function playToggleSound(isDark: boolean) {
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>("system");
+  const [colorTheme, setColorThemeState] = useState<ColorTheme>("default");
   const initializedRef = useRef(false);
 
   useEffect(() => {
@@ -56,6 +69,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const initial = stored && ["light", "dark", "system"].includes(stored) ? stored : "system";
     setThemeState(initial);
     applyTheme(initial);
+
+    const storedColor = localStorage.getItem("color-theme") as ColorTheme | null;
+    const validColors: ColorTheme[] = ["default", "ember", "amethyst", "sepia", "sandstone", "dune", "slate"];
+    const initialColor = storedColor && validColors.includes(storedColor) ? storedColor : "default";
+    setColorThemeState(initialColor);
+    applyColorTheme(initialColor);
+
     initializedRef.current = true;
 
     const mql = window.matchMedia("(prefers-color-scheme: dark)");
@@ -110,8 +130,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
+  const setColorTheme = useCallback((c: ColorTheme) => {
+    setColorThemeState(c);
+    localStorage.setItem("color-theme", c);
+    applyColorTheme(c);
+  }, []);
+
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, colorTheme, setTheme, setColorTheme }}>
       {children}
     </ThemeContext.Provider>
   );
