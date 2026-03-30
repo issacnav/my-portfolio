@@ -63,7 +63,7 @@ function LocalTime() {
   if (!time) return null;
 
   return (
-    <span className="inline-flex items-center gap-1 font-mono text-xs text-muted-foreground">
+    <span className="inline-flex items-center gap-1.5 font-mono text-sm text-muted-foreground">
       <span>🕐</span>
       <span>{time} Scotland</span>
     </span>
@@ -167,17 +167,17 @@ export function HeroSection() {
           </SlideIn>
 
           <FadeIn delay={0.5}>
-            <p className="flex flex-wrap items-baseline gap-1.5 font-mono text-xs leading-snug text-muted-foreground sm:text-sm">
+            <p className="flex flex-wrap items-baseline gap-1.5 font-mono text-sm leading-snug text-muted-foreground sm:text-base">
               <TextFlip />
-              <span>•</span>
+              <span>·</span>
               <span>Scotland, UK</span>
             </p>
           </FadeIn>
 
           <FadeIn delay={0.6}>
-            <div className="flex flex-wrap min-h-4 items-center gap-2 font-mono text-xs text-muted-foreground sm:gap-3">
+            <div className="flex flex-wrap min-h-5 items-center gap-3 font-mono text-sm text-muted-foreground mt-0.5 sm:gap-4">
               <span className="flex items-center gap-1.5">
-                <span className="status-pulse h-1.5 w-1.5 shrink-0 rounded-full bg-green-500" />
+                <span className="status-pulse h-2 w-2 shrink-0 rounded-full bg-green-500" />
                 <span>Open to opportunities</span>
               </span>
               <LocalTime />

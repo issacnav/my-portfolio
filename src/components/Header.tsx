@@ -71,7 +71,7 @@ export function Header() {
 
           <button
             className="inline-flex items-center justify-center rounded-lg hover:bg-accent hover:text-accent-foreground size-8 shrink-0"
-            onClick={() => setTheme(isDark ? "light" : "dark")}
+            onClick={(e) => setTheme(isDark ? "light" : "dark", e)}
             aria-label="Theme Toggle"
           >
             <AnimatePresence mode="wait" initial={false}>

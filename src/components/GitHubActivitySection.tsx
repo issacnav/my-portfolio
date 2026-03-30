@@ -2,6 +2,7 @@
 
 import { Panel } from "@/components/LayoutParts";
 import { FadeIn, StaggerContainer, StaggerItem, motion } from "@/components/Motion";
+import { useState, useEffect } from "react";
 import {
   Heart,
   MessageCircle,
@@ -22,6 +23,30 @@ const certifications = [
   "Manual Therapy Certification",
 ];
 
+const hoverColors = [
+  "oklch(0.93 0.05 0)",      // soft rose
+  "oklch(0.93 0.04 250)",    // soft blue
+  "oklch(0.92 0.05 150)",    // soft green
+  "oklch(0.93 0.05 30)",     // soft orange
+  "oklch(0.92 0.04 280)",    // soft purple
+  "oklch(0.93 0.04 190)",    // soft teal
+  "oklch(0.93 0.04 80)",     // soft yellow
+  "oklch(0.92 0.04 220)",    // soft sky
+  "oklch(0.92 0.05 330)",    // soft pink
+];
+
+const hoverColorsDark = [
+  "oklch(0.30 0.05 0)",      // dark rose
+  "oklch(0.30 0.04 250)",    // dark blue
+  "oklch(0.28 0.05 150)",    // dark green
+  "oklch(0.30 0.05 30)",     // dark orange
+  "oklch(0.28 0.04 280)",    // dark purple
+  "oklch(0.30 0.04 190)",    // dark teal
+  "oklch(0.30 0.04 80)",     // dark yellow
+  "oklch(0.28 0.04 220)",    // dark sky
+  "oklch(0.28 0.05 330)",    // dark pink
+];
+
 const skills: { label: string; icon: ComponentType<{ className?: string }> }[] = [
   { label: "Patient Care", icon: Heart },
   { label: "Communication", icon: MessageCircle },
@@ -35,6 +60,15 @@ const skills: { label: string; icon: ComponentType<{ className?: string }> }[] =
 ];
 
 export function CertificationsSection() {
+  const [isDark, setIsDark] = useState(false);
+  useEffect(() => {
+    const check = () => setIsDark(document.documentElement.classList.contains("dark"));
+    check();
+    const observer = new MutationObserver(check);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <Panel title="Certifications & Skills" id="certifications">
       <div className="p-4 space-y-4">
@@ -57,11 +91,11 @@ export function CertificationsSection() {
           <div>
             <h3 className="font-mono text-sm font-medium text-foreground mb-2">Skills</h3>
             <StaggerContainer className="grid grid-cols-2 sm:grid-cols-3 divide-x divide-y divide-border rounded-lg border overflow-hidden">
-              {skills.map((skill) => (
+              {skills.map((skill, i) => (
                 <StaggerItem key={skill.label}>
                   <motion.div
                     className="flex items-center gap-2.5 px-3 py-3 font-mono text-xs text-muted-foreground cursor-default"
-                    whileHover={{ backgroundColor: "var(--color-accent)" }}
+                    whileHover={{ backgroundColor: isDark ? hoverColorsDark[i] : hoverColors[i] }}
                     transition={{ duration: 0.15 }}
                   >
                     <skill.icon className="size-4 shrink-0" />
