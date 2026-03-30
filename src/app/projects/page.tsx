@@ -16,7 +16,7 @@ const projects = [
       "A comprehensive physiotherapy platform designed to streamline patient care, exercise prescription, and rehabilitation tracking. Built to bridge the gap between practitioners and patients with an intuitive digital experience.",
     tags: ["Healthcare", "Physiotherapy", "Platform"],
     url: "https://physiohub.io",
-    status: "Live" as const,
+    status: "Archived" as const,
   },
   {
     title: "Quizl",
@@ -83,8 +83,14 @@ export default function ProjectsPage() {
                           <h2 className="font-pixel text-lg font-semibold group-hover:text-foreground sm:text-xl">
                             {project.title}
                           </h2>
-                          <span className="inline-flex items-center gap-1 rounded-full border border-green-500/30 bg-green-500/10 px-2 py-0.5 text-[10px] font-medium text-green-600 dark:text-green-400">
-                            <span className="size-1.5 rounded-full bg-green-500" />
+                          <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-medium ${
+                            project.status === "Live"
+                              ? "border-green-500/30 bg-green-500/10 text-green-600 dark:text-green-400"
+                              : "border-muted-foreground/30 bg-muted text-muted-foreground"
+                          }`}>
+                            <span className={`size-1.5 rounded-full ${
+                              project.status === "Live" ? "bg-green-500" : "bg-muted-foreground"
+                            }`} />
                             {project.status}
                           </span>
                         </div>
