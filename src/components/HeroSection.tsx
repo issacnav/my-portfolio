@@ -130,9 +130,10 @@ export function HeroSection() {
         {/* Avatar */}
         <ScaleIn delay={0.2} className="w-[35%] shrink-0 p-2 sm:w-auto sm:shrink-0 sm:p-5">
           <motion.div
-            className="aspect-square h-auto w-full rounded-[12px] border border-border p-[4px] transition duration-300 hover:brightness-90 sm:size-32"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
+            className="aspect-square h-auto w-full rounded-[12px] border border-border p-[4px] transition duration-200 hover:brightness-95 sm:size-32"
+            whileHover={{ scale: 1.07, y: -3, rotate: -1.8, rotateX: 2.5, rotateY: -5.5 }}
+            transition={{ type: "spring", stiffness: 560, damping: 17, mass: 0.58 }}
+            style={{ transformPerspective: 1000 }}
           >
             <div className="relative aspect-square h-auto w-full overflow-hidden rounded-[8px]">
               <Image

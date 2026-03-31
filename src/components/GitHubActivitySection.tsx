@@ -59,8 +59,30 @@ const skills: { label: string; icon: ComponentType<{ className?: string }> }[] =
   { label: "Manual Therapy", icon: Hand },
 ];
 
+const interests = [
+  "Creative writing",
+  "Volunteering",
+  "Chess",
+  "Web development",
+];
+
+const interestHoverColors = [
+  "oklch(0.965 0.016 350)",
+  "oklch(0.962 0.016 155)",
+  "oklch(0.968 0.015 85)",
+  "oklch(0.965 0.016 235)",
+];
+
+const interestHoverColorsDark = [
+  "oklch(0.29 0.022 350)",
+  "oklch(0.285 0.022 155)",
+  "oklch(0.3 0.02 85)",
+  "oklch(0.29 0.022 235)",
+];
+
 export function CertificationsSection() {
   const [isDark, setIsDark] = useState(false);
+
   useEffect(() => {
     const check = () => setIsDark(document.documentElement.classList.contains("dark"));
     check();
@@ -74,11 +96,11 @@ export function CertificationsSection() {
       <div className="p-4 space-y-4">
         <FadeIn>
           <div>
-            <h3 className="font-mono text-sm font-medium text-foreground mb-2">Certifications</h3>
+            <h3 className="mb-2 font-mono text-sm font-medium text-foreground">Certifications</h3>
             <StaggerContainer className="space-y-1.5">
               {certifications.map((cert) => (
                 <StaggerItem key={cert}>
-                  <li className="flex items-start gap-2 font-mono text-sm text-muted-foreground list-none">
+                  <li className="list-none flex items-start gap-2 font-mono text-sm text-muted-foreground">
                     <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-info" />
                     {cert}
                   </li>
@@ -87,16 +109,17 @@ export function CertificationsSection() {
             </StaggerContainer>
           </div>
         </FadeIn>
+
         <FadeIn delay={0.2}>
           <div>
-            <h3 className="font-mono text-sm font-medium text-foreground mb-2">Skills</h3>
-            <StaggerContainer className="grid grid-cols-2 sm:grid-cols-3 divide-x divide-y divide-border rounded-lg border overflow-hidden">
+            <h3 className="mb-2 font-mono text-sm font-medium text-foreground">Skills</h3>
+            <StaggerContainer className="grid grid-cols-2 overflow-hidden rounded-lg border divide-x divide-y divide-border sm:grid-cols-3">
               {skills.map((skill, i) => (
                 <StaggerItem key={skill.label}>
                   <motion.div
-                    className="flex items-center gap-2.5 px-3 py-3 font-mono text-xs text-muted-foreground cursor-default"
+                    className="cursor-default flex items-center gap-2.5 px-3 py-3 font-mono text-xs text-muted-foreground"
                     whileHover={{ backgroundColor: isDark ? hoverColorsDark[i] : hoverColors[i] }}
-                    transition={{ duration: 0.15 }}
+                    transition={{ duration: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
                   >
                     <skill.icon className="size-4 shrink-0" />
                     <span className="leading-tight">{skill.label}</span>
@@ -106,15 +129,27 @@ export function CertificationsSection() {
             </StaggerContainer>
           </div>
         </FadeIn>
+
         <FadeIn delay={0.3}>
-          <div className="mx-auto w-full max-w-sm">
-            <div className="flex items-center gap-3 rounded-2xl border border-neutral-200 bg-white px-4 py-3 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
-              <div className="flex flex-1 flex-col gap-1">
-                <span className="text-xs font-medium text-neutral-500 dark:text-neutral-400">Interests</span>
-                <span className="text-sm text-neutral-800 dark:text-white/80">
-                  Creative writing · Volunteering · Chess · Web development
-                </span>
-              </div>
+          <div>
+            <h3 className="mb-2 font-mono text-sm font-medium text-foreground">Interests</h3>
+            <div className="flex flex-wrap gap-2">
+              {interests.map((interest, index) => (
+                <motion.span
+                  key={interest}
+                  className="inline-flex items-center rounded-lg border bg-zinc-50 px-2.5 py-1 font-mono text-xs text-muted-foreground dark:bg-zinc-900"
+                  whileHover={{
+                    y: -1,
+                    scale: 1.02,
+                    backgroundColor: isDark
+                      ? interestHoverColorsDark[index]
+                      : interestHoverColors[index],
+                  }}
+                  transition={{ duration: 0.18, ease: [0.21, 0.47, 0.32, 0.98] }}
+                >
+                  {interest}
+                </motion.span>
+              ))}
             </div>
           </div>
         </FadeIn>
