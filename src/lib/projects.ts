@@ -1,5 +1,5 @@
 export const PHYSIOHUB_PROFILES_DEMO_URL =
-  "https://mvp-demo-cqh4w2iw4-quizls-projects.vercel.app/";
+  "https://mvp-demo-gamma.vercel.app/";
 
 export type ProjectStatus = "Current Build" | "Live" | "Archived";
 
