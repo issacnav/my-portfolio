@@ -1,6 +1,7 @@
 import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
 import { AboutSection } from "@/components/AboutSection";
+import { FeaturedProductSection } from "@/components/FeaturedProductSection";
 import { ConnectSection } from "@/components/ConnectSection";
 import { CertificationsSection } from "@/components/GitHubActivitySection";
 import { ExperienceSection } from "@/components/ExperienceSection";
@@ -25,6 +26,9 @@ export default function Home() {
           <HeroSection />
 
           <AboutSection />
+          <SectionSeparator />
+
+          <FeaturedProductSection />
           <SectionSeparator />
 
           <ConnectSection />

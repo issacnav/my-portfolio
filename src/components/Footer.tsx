@@ -37,8 +37,8 @@ export function Footer() {
         <CrossMarker position="bottom-left" />
         <CrossMarker position="bottom-right" />
 
-        <div className="flex items-end justify-between gap-2 px-3 pb-4 sm:px-4">
-          <div className="mt-6 flex flex-col leading-none">
+        <div className="flex flex-col-reverse items-start justify-between gap-1 px-3 pb-4 sm:flex-row sm:items-end sm:gap-2 sm:px-4">
+          <div className="mt-2 flex flex-col leading-none sm:mt-6">
             <Signature className="w-24 mb-2 text-foreground sm:w-28" />
             <span className="font-mono text-[12px] text-muted-foreground">
               © 2026 Sarthak Navalekar
@@ -47,7 +47,7 @@ export function Footer() {
               Physiotherapist · Scotland, UK
             </span>
           </div>
-          <div className="w-20 h-20 cursor-pointer flex-shrink-0" onClick={handleClick}>
+          <div className="h-16 w-16 cursor-pointer self-end flex-shrink-0 sm:h-20 sm:w-20 sm:self-auto" onClick={handleClick}>
             {loaded && hiAnimation.current && (
               <Lottie
                 lottieRef={lottieRef}

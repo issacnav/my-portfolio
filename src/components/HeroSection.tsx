@@ -123,12 +123,12 @@ export function HeroSection() {
       </div>
 
       {/* Profile row */}
-      <div className="screen-line-after relative flex border-x border-edge">
+      <div className="screen-line-after relative flex border-x border-edge max-[420px]:flex-col">
         <CrossMarker position="top-left" />
         <CrossMarker position="top-right" />
 
         {/* Avatar */}
-        <ScaleIn delay={0.2} className="w-[35%] shrink-0 p-2 sm:w-auto sm:shrink-0 sm:p-5">
+        <ScaleIn delay={0.2} className="w-[35%] shrink-0 p-2 max-[420px]:w-full max-[420px]:max-w-[9rem] max-[420px]:self-center max-[420px]:pb-0 sm:w-auto sm:shrink-0 sm:p-5">
           <motion.div
             className="aspect-square h-auto w-full rounded-[12px] border border-border p-[4px] transition duration-200 hover:brightness-95 sm:size-32"
             whileHover={{ scale: 1.07, y: -3, rotate: -1.8, rotateX: 2.5, rotateY: -5.5 }}
@@ -148,10 +148,10 @@ export function HeroSection() {
         </ScaleIn>
 
         {/* Info */}
-        <div className="flex flex-1 flex-col justify-center gap-1.5 overflow-hidden pl-2 pr-2 sm:pl-4 sm:pr-0">
+        <div className="flex flex-1 flex-col justify-center gap-1.5 overflow-hidden pl-2 pr-2 max-[420px]:px-4 max-[420px]:pb-4 sm:pl-4 sm:pr-0">
           <SlideIn direction="right" delay={0.3}>
-            <div className="flex items-center gap-1.5 pt-1 pb-1 sm:gap-2 sm:pt-2 sm:pb-2">
-              <h1 className="font-pixel text-xl leading-tight font-black sm:text-3xl">
+            <div className="flex flex-wrap items-center gap-1.5 pt-1 pb-1 sm:gap-2 sm:pt-2 sm:pb-2">
+              <h1 className="min-w-0 font-pixel text-[1.15rem] leading-tight font-black sm:text-3xl">
                 Sarthak Navalekar
               </h1>
               <div className="flex items-center gap-1 shrink-0">
@@ -168,7 +168,7 @@ export function HeroSection() {
           </SlideIn>
 
           <FadeIn delay={0.5}>
-            <div className="flex items-baseline gap-0 font-mono text-sm leading-snug text-muted-foreground sm:text-base">
+            <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5 font-mono text-sm leading-snug text-muted-foreground sm:text-base">
               <TextFlip />
               <span className="mx-1.5">·</span>
               <span className="whitespace-nowrap">Scotland, UK</span>
@@ -176,7 +176,7 @@ export function HeroSection() {
           </FadeIn>
 
           <FadeIn delay={0.6}>
-            <div className="flex items-center gap-1.5 font-mono text-sm text-muted-foreground sm:text-base">
+            <div className="flex flex-wrap items-center gap-1.5 font-mono text-sm text-muted-foreground sm:text-base">
               <span className="status-pulse h-1.5 w-1.5 shrink-0 rounded-full bg-green-500" />
               <span>Open to opportunities</span>
             </div>

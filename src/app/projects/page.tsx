@@ -7,26 +7,145 @@ import { CommandPalette } from "@/components/CommandPalette";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { CrossMarker, SectionSeparator } from "@/components/LayoutParts";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/Motion";
+import { ProjectStatusBadge } from "@/components/ProjectStatusBadge";
+import { buttonVariants } from "@/components/ui/button";
+import { projects, type Project } from "@/lib/projects";
+import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
-const projects = [
-  {
-    title: "PhysioHub",
-    description:
-      "A comprehensive physiotherapy platform consist of Quiz, Flashcard and Blog features. The Quiz feature offers interactive quizzes with real-time scoring, while the Flashcard feature provides a spaced repetition system for effective learning. Discontinued in 2025 due to examination commitments.",
-    tags: ["Healthcare", "Physiotherapy", "Platform"],
-    url: "https://physiohub.io",
-    status: "Archived" as const,
-  },
-  {
-    title: "Quizl",
-    description:
-      "An interactive quiz application with real-time scoring, multiple categories, and a clean user interface. Built with Next.js for fast performance and smooth transitions between questions.",
-    tags: ["Next.js", "Quiz", "Interactive"],
-    url: "https://quizl-opal.vercel.app/",
-    status: "Live" as const,
-  },
-];
+function ArrowUpRightIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M7 17L17 7" />
+      <path d="M7 7h10v10" />
+    </svg>
+  );
+}
+
+function ProjectCard({
+  project,
+  index,
+}: {
+  project: Project;
+  index: number;
+}) {
+  const isFeatured = project.featured;
+  const chips = project.tags;
+
+  return (
+    <StaggerItem>
+      <motion.article
+        className={cn(
+          "group screen-line-after border-x border-edge transition-colors",
+          "hover:bg-accent/50"
+        )}
+        whileHover={{ x: 4 }}
+        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+      >
+        <div
+          className={cn(
+            "relative px-4 py-5",
+            isFeatured && "px-4 py-6 sm:px-5 sm:py-6"
+          )}
+        >
+          {index === 0 && (
+            <>
+              <CrossMarker position="top-left" />
+              <CrossMarker position="top-right" />
+            </>
+          )}
+
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  {project.eyebrow ? (
+                    <span className="inline-flex rounded-full border border-border bg-background px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                      {project.eyebrow}
+                    </span>
+                  ) : null}
+                  <ProjectStatusBadge status={project.status} />
+                </div>
+
+                <h2
+                  className={cn(
+                    "mt-3 font-pixel font-semibold leading-tight group-hover:text-foreground",
+                    isFeatured ? "text-xl sm:text-2xl" : "text-lg sm:text-xl"
+                  )}
+                >
+                  {project.title}
+                </h2>
+
+                <p className="mt-1 font-mono text-sm text-foreground">
+                  {project.tagline}
+                </p>
+              </div>
+
+              {project.subdomainPreview ? (
+                <div className="inline-flex w-fit shrink-0 rounded-full border border-border bg-background px-3 py-1.5 font-mono text-xs text-muted-foreground">
+                  {project.subdomainPreview}
+                </div>
+              ) : (
+                <div className="mt-1 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-foreground">
+                  <ArrowUpRightIcon />
+                </div>
+              )}
+            </div>
+
+            <p className="max-w-2xl font-mono text-sm leading-relaxed text-muted-foreground">
+              {project.description}
+            </p>
+
+            {project.note ? (
+              <p className="font-mono text-xs text-muted-foreground">
+                {project.note}
+              </p>
+            ) : null}
+
+            <div className="flex flex-wrap gap-1.5">
+              {chips.map((chip) => (
+                <span
+                  key={chip}
+                  className="rounded-md border border-border bg-background/80 px-2.5 py-1 font-mono text-[11px] text-muted-foreground"
+                >
+                  {chip}
+                </span>
+              ))}
+            </div>
+
+            <div>
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  buttonVariants({
+                    variant: isFeatured ? "default" : "outline",
+                    size: "sm",
+                  }),
+                  "w-full justify-center font-mono sm:w-auto"
+                )}
+              >
+                {project.ctaLabel}
+                <ArrowUpRightIcon />
+              </a>
+            </div>
+          </div>
+        </div>
+      </motion.article>
+    </StaggerItem>
+  );
+}
 
 export default function ProjectsPage() {
   return (
@@ -49,7 +168,7 @@ export default function ProjectsPage() {
               </FadeIn>
               <FadeIn delay={0.3}>
                 <p className="mt-2 font-mono text-sm text-muted-foreground">
-                  Things I&apos;ve built and shipped.
+                  Selected work, with the newest PhysioHub direction featured first.
                 </p>
               </FadeIn>
             </div>
@@ -59,76 +178,8 @@ export default function ProjectsPage() {
 
           {/* Project cards */}
           <StaggerContainer className="space-y-0">
-            {projects.map((project, i) => (
-              <StaggerItem key={project.title}>
-                <motion.a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block screen-line-after border-x border-edge transition-colors hover:bg-accent/50"
-                  whileHover={{ x: 4 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                >
-                  <div className="relative px-4 py-5">
-                    {i === 0 && (
-                      <>
-                        <CrossMarker position="top-left" />
-                        <CrossMarker position="top-right" />
-                      </>
-                    )}
-
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-2">
-                          <h2 className="font-pixel text-lg font-semibold group-hover:text-foreground sm:text-xl">
-                            {project.title}
-                          </h2>
-                          <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-medium ${
-                            project.status === "Live"
-                              ? "border-green-500/30 bg-green-500/10 text-green-600 dark:text-green-400"
-                              : "border-muted-foreground/30 bg-muted text-muted-foreground"
-                          }`}>
-                            <span className={`size-1.5 rounded-full ${
-                              project.status === "Live" ? "bg-green-500" : "bg-muted-foreground"
-                            }`} />
-                            {project.status}
-                          </span>
-                        </div>
-                        <p className="mt-1.5 font-mono text-sm leading-relaxed text-muted-foreground">
-                          {project.description}
-                        </p>
-                        <div className="mt-3 flex flex-wrap gap-1.5">
-                          {project.tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="rounded-md border border-border bg-muted px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Arrow */}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="mt-1 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-foreground"
-                      >
-                        <path d="M7 17L17 7" />
-                        <path d="M7 7h10v10" />
-                      </svg>
-                    </div>
-                  </div>
-                </motion.a>
-              </StaggerItem>
+            {projects.map((project, index) => (
+              <ProjectCard key={project.slug} project={project} index={index} />
             ))}
           </StaggerContainer>
 

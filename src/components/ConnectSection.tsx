@@ -26,13 +26,13 @@ function ContactLink({
 }) {
   return (
     <a
-      className="group touch-manipulation active:opacity-75"
+      className="group w-full touch-manipulation active:opacity-75 sm:w-auto"
       href={href}
       target="_blank"
       rel="noopener noreferrer"
     >
       <motion.div
-        className="h-9 select-none flex items-center gap-2 whitespace-nowrap rounded-xl border border-neutral-200 bg-white px-3 shadow-sm transition-all duration-200 hover:bg-neutral-50 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-neutral-700 dark:hover:bg-neutral-800"
+        className="flex h-9 w-full select-none items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-neutral-200 bg-white px-3 shadow-sm transition-all duration-200 hover:bg-neutral-50 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-neutral-700 dark:hover:bg-neutral-800 sm:w-auto sm:justify-start"
         whileHover={{ scale: 1.05, y: -2 }}
         whileTap={{ scale: 0.95 }}
         transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -72,9 +72,9 @@ function VCardButton() {
   }, []);
 
   return (
-    <button onClick={download} className="touch-manipulation active:opacity-75">
+    <button onClick={download} className="w-full touch-manipulation active:opacity-75 sm:w-auto">
       <motion.div
-        className="justify-center rounded-xl border transition-all duration-200 border-neutral-200 bg-white hover:bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-neutral-700 dark:hover:bg-neutral-800 shadow-sm hover:shadow-md h-9 px-3 flex items-center gap-2 whitespace-nowrap select-none"
+        className="flex h-9 w-full select-none items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-neutral-200 bg-white px-3 shadow-sm transition-all duration-200 hover:bg-neutral-50 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-neutral-700 dark:hover:bg-neutral-800 sm:w-auto"
         whileHover={{ scale: 1.05, y: -2 }}
         whileTap={{ scale: 0.95 }}
         transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -108,13 +108,13 @@ export function ConnectSection() {
   return (
     <Panel title="Connect" id="connect">
       <div className="p-4">
-        <StaggerContainer className="flex flex-wrap items-center gap-3 overflow-visible pb-1 sm:gap-4">
+        <StaggerContainer className="grid grid-cols-1 gap-3 overflow-visible pb-1 sm:flex sm:flex-wrap sm:items-center sm:gap-4">
           {links.map((link) => (
-            <StaggerItem key={link.label} className="relative inline-block">
+            <StaggerItem key={link.label} className="relative block sm:inline-block">
               <ContactLink {...link} />
             </StaggerItem>
           ))}
-          <StaggerItem className="relative inline-block">
+          <StaggerItem className="relative block sm:inline-block">
             <VCardButton />
           </StaggerItem>
         </StaggerContainer>
